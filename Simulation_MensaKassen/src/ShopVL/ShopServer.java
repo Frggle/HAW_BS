@@ -2,25 +2,22 @@ package ShopVL;
 /*
  * ShopServer.java
  * Version 1.0
- * Autor: Hübner
+ * Autor: M. Hübner
  * Zweck: Erzeugt eine Simulationsumgebung für ein Shop-System
  */
 import java.util.LinkedList;
 
-public class CheckoutServer
-{
+public class ShopServer {
 	public final int NO_CUSTOMER = 16; // Anzahl Kunden-Threads
 
-	public static void main(String[] args)
-	{
+	public static void main(String[] args) {
 		/* Starte Simulation */
-		new CheckoutServer().startSimulation();
+		new ShopServer().startSimulation();
 	}
 
-	public void startSimulation()
-	{
+	public void startSimulation() {
 		/* Starte und beende Threads */
-		Checkout server = new Checkout();
+		Shop server = new Shop();
 
 		// Thread-Liste erzeugen
 		LinkedList<Customer> customerList = new LinkedList<Customer>();
@@ -28,8 +25,7 @@ public class CheckoutServer
 		System.err.println("-------------------- START -------------------");
 
 		// Kunden - Threads erzeugen
-		for (int i = 1; i <= NO_CUSTOMER; i++)
-		{
+		for (int i = 1; i <= NO_CUSTOMER; i++) {
 			Customer current = new Customer(server);
 			current.setName("Customer " + i);
 			customerList.add(current);
@@ -37,16 +33,13 @@ public class CheckoutServer
 		}
 
 		// Laufzeit abwarten
-		try
-		{
+		try {
 			Thread.sleep(5000);
-		} catch (InterruptedException e)
-		{
+		} catch (InterruptedException e) {
 		}
 
 		// Kunden - Threads stoppen
-		for (Customer current : customerList)
-		{
+		for (Customer current : customerList) {
 			current.interrupt();
 		}
 
