@@ -1,19 +1,20 @@
+package ShopVL;
 /*
  * ShopServer.java
  * Version 1.0
- * Autor: Kaepke
+ * Autor: Hübner
  * Zweck: Erzeugt eine Simulationsumgebung für ein Shop-System
  */
 import java.util.LinkedList;
 
-public class Checkout_Server
+public class CheckoutServer
 {
 	public final int NO_CUSTOMER = 16; // Anzahl Kunden-Threads
 
 	public static void main(String[] args)
 	{
 		/* Starte Simulation */
-		new Checkout_Server().startSimulation();
+		new CheckoutServer().startSimulation();
 	}
 
 	public void startSimulation()

@@ -1,7 +1,8 @@
+package ShopVL;
 /*
  * Customer.java
  * Version 1.0
- * Autor: Kaepke
+ * Autor: Hübner
  * Zweck: Simuliert das Verhalten eines Shop-Kunden
  */
 public class Customer extends Thread

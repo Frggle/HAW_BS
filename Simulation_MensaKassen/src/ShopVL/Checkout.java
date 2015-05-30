@@ -1,7 +1,8 @@
+package ShopVL;
 /*
  * Checkout.java
  * Version 1.0
- Autor: Kaepke
+ Autor: Hübner
  Zweck: Stellt einen generischen Shop mit Zugriffsmethoden für Customer zur Verfügung
  */
 
