@@ -37,6 +37,7 @@ public class Mensa
 			semaphore.acquire();
 					
 			// die Kasse mit der kürzesten Warteschlange wird ermittelt und dem Student zugewiesen
+			Kasse k = gibOptimaleKasse();
 		} catch (InterruptedException e)
 		{
 			//
@@ -50,7 +51,7 @@ public class Mensa
 	/* gibt die Kasse zurück, wo die Warteschlange am kürzesten ist */
 	private Kasse gibOptimaleKasse()
 	{
-		Kasse optKasse;
+		Kasse optKasse = null;
 		warteschlangenMap = new HashMap<Kasse, Integer>();
 		for(Kasse kasse : kassenListe)
 		{

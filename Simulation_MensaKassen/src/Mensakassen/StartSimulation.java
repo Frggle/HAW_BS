@@ -3,6 +3,8 @@ package Mensakassen;
 import java.util.ArrayList;
 import java.util.List;
 
+import Mensakassen.Student;
+
 public class StartSimulation
 {
 	/* Konstanten */

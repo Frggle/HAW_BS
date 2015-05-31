@@ -30,7 +30,7 @@ public class Student extends Thread
 				System.err.println("Student " + studentID + " hat sich angestellt");
 				
 				/* Student betritt die Mensa */
-				mensa.enter(this);
+				
 				
 				/* Student isst und verdaut */
 				essenUndVerdauen();
