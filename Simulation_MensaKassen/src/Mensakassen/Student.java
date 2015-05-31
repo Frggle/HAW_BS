@@ -1,7 +1,5 @@
 package Mensakassen;
 
-import java.util.List;
-
 /*
  * Student.java
  * Version 1.0
@@ -10,17 +8,60 @@ import java.util.List;
  */
 public class Student extends Thread
 {
-	private String student_nummer;
-	private List<Kasse> kassenListe;
-	
-	public Student(String nummer, List<Kasse> _kassenListe)
+	/* Variablen */
+	private int studentID;
+	private Mensa mensa;
+		
+	/* Konstruktor */
+	public Student(int id, Mensa _mensa)
 	{
-		student_nummer = nummer;
-		kassenListe = _kassenListe;
+		studentID = id;
+		mensa = _mensa;
 	}
 	
-	public String gibName()
+	/* wird von der .start() Methode aufgerufen */
+	public void run()
 	{
-		return student_nummer;
+		try
+		{
+			/* gehe immer wieder essen, bis Mensa geschlossen */
+			while(!isInterrupted())
+			{
+				System.err.println("Student " + studentID + " hat sich angestellt");
+				
+				/* Student betritt die Mensa */
+				mensa.enter(this);
+				
+				/* Student isst und verdaut */
+				essenUndVerdauen();
+				
+				/* Student wartet bis er erneut in die Mensa geht */
+				warten();			
+				}
+		} catch (InterruptedException e)
+		{
+			System.err.println("Student " + studentID + " wurde unterbrochen!");
+		}
 	}
+	
+	/* Student benutzt diese Methode, um das Essen zu verdauen */
+	private void essenUndVerdauen() throws InterruptedException
+	{
+		int verdauungsdauer = (int) (1000* Math.random());
+		Thread.sleep(verdauungsdauer);
+	}
+	
+	/* Student wartet, bis er erneut in die Mensa geht */
+	private void warten() throws InterruptedException
+	{
+		int warteZeit = (int) (1000 * Math.random());
+		Thread.sleep(warteZeit);
+	}
+	
+	/* Gett für StudentenID */
+	public int gibStudentID()
+	{
+		return studentID;
+	}
+	
 }

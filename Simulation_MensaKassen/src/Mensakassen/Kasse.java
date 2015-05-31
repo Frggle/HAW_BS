@@ -1,33 +1,46 @@
 package Mensakassen;
 
-import java.util.ArrayList;
+import java.util.concurrent.Semaphore;
+
 /*
  * Kasse.java
  * Version 1.0
- Autor: Kaepke
- Zweck: ...
+ * Autor: Kaepke
+ * Zweck: ...
  */
 
-public class Kasse
+public class Kasse extends Thread
 {
-	private String kassenNummer;
-	private ArrayList<?> warteschlange;
+	/* Konstanten */
+	private final int WARTESCHLANGELAENGE = 3;
 	
-	public Kasse(String nummer)
+	/* Variablen */
+	private int kassenID;
+	
+	/* Pro Kasse X Studenten warten */
+	private Semaphore semaphore = new Semaphore(WARTESCHLANGELAENGE);
+	
+	/* Konstruktor */
+	public Kasse(int id)
 	{
-		kassenNummer = nummer;
-		warteschlange = new ArrayList<>();
+		kassenID = id;
 	}
 	
-	/* Student ruft die Methode HOLE_ESSEN auf */
-	public void holeEssen() throws InterruptedException
+	/* wird von .start() Methode aufgerufen */
+	public void run()
 	{
-		int sleepTime = (int) (Math.random() * 1000);
-		Thread.sleep(sleepTime);
+		//
 	}
 	
-	public String gibName()
+	/* Getter für die Anzahl der wartenden Studenten-Threads */
+	public int gibWarteschlangenLaenge()
 	{
-		return kassenNummer;
+		return semaphore.getQueueLength();
+	}
+	
+	/* Getter für Kassen ID */
+	public int gibKassenID()
+	{
+		return kassenID;
 	}
 }
