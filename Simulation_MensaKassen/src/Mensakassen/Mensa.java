@@ -1,9 +1,11 @@
 package Mensakassen;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 import java.util.concurrent.Semaphore;
 
 /*
@@ -18,7 +20,6 @@ public class Mensa
 	private List<Kasse> kassenListe;
 	private List<Student> studentenListe;
 	private List<Integer> warteschlangen;
-	private Map<Kasse, Integer> warteschlangenMap;
 	
 	/* EINE Kasse kann nur ein Student zur Zeit bedienen/bezahlen lassen */
 	private Semaphore semaphore = new Semaphore(1);
@@ -38,6 +39,7 @@ public class Mensa
 					
 			// die Kasse mit der kürzesten Warteschlange wird ermittelt und dem Student zugewiesen
 			Kasse k = gibOptimaleKasse();
+			k.anstellen(student);
 		} catch (InterruptedException e)
 		{
 			//
@@ -51,13 +53,17 @@ public class Mensa
 	/* gibt die Kasse zurück, wo die Warteschlange am kürzesten ist */
 	private Kasse gibOptimaleKasse()
 	{
+		Semaphore sema = new Sema
 		Kasse optKasse = null;
-		warteschlangenMap = new HashMap<Kasse, Integer>();
+		warteschlangen = new ArrayList<Integer>();
+		int min = Integer.MAX_VALUE;
 		for(Kasse kasse : kassenListe)
 		{
-			warteschlangenMap.put(kasse, kasse.gibWarteschlangenLaenge());
+			if(kasse.)
+			{
+				optKasse = kasse;
+			}
 		}
-		Collections.sort(warteschlangen);
 		return optKasse;
 	}
 }

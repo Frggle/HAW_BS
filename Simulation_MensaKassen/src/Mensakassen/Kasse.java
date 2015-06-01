@@ -11,14 +11,11 @@ import java.util.concurrent.Semaphore;
 
 public class Kasse extends Thread
 {
-	/* Konstanten */
-	private final int WARTESCHLANGELAENGE = 3;
-	
 	/* Variablen */
 	private int kassenID;
 	
-	/* Pro Kasse X Studenten warten */
-	private Semaphore semaphore = new Semaphore(WARTESCHLANGELAENGE);
+	/* Pro Kasse genau ein Student warten */
+	private Semaphore semaphore = new Semaphore(1);
 	
 	/* Konstruktor */
 	public Kasse(int id)
@@ -32,10 +29,9 @@ public class Kasse extends Thread
 		//
 	}
 	
-	/* Getter für die Anzahl der wartenden Studenten-Threads */
-	public int gibWarteschlangenLaenge()
+	public void anstellen(Student student)
 	{
-		return semaphore.getQueueLength();
+		//
 	}
 	
 	/* Getter für Kassen ID */
