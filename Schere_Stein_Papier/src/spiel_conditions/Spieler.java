@@ -1,13 +1,16 @@
-package spiel_synchronized_wait_notify;
+package spiel_conditions;
+
+import spiel_conditions.Hand;
+import spiel_conditions.Spieltisch_condition;;
 
 public class Spieler extends Thread
 {
 	/* Variablen */
-	private Spieltisch_synchronized tisch;
+	private Spieltisch_condition tisch;
 
 	
 	/* Konstruktor */
-	public Spieler(String _name, Spieltisch_synchronized _tisch)
+	public Spieler(String _name, Spieltisch_condition _tisch)
 	{
 		super(_name);
 		tisch = _tisch;

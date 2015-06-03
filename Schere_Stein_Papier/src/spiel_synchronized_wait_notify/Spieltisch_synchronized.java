@@ -3,14 +3,14 @@ package spiel_synchronized_wait_notify;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Spieltisch
+public class Spieltisch_synchronized
 {
 	/* Variablen */
 	private Map<Spieler, Hand> gespielteHaende;
 	private int spielerAnzahl;
 	
 	/* Konstruktor */
-	public Spieltisch(int _spieleranzahl)
+	public Spieltisch_synchronized(int _spieleranzahl)
 	{
 		gespielteHaende = new HashMap<Spieler, Hand>();
 		spielerAnzahl = _spieleranzahl;

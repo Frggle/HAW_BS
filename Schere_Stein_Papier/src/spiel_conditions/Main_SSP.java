@@ -1,8 +1,12 @@
-package spiel_synchronized_wait_notify;
+package spiel_conditions;
 
 import java.text.NumberFormat;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
+
+import spiel_synchronized_wait_notify.Schiedsrichter;
+import spiel_synchronized_wait_notify.Spieler;
+import spiel_synchronized_wait_notify.Spieltisch_synchronized;
 
 public class Main_SSP extends Thread
 {

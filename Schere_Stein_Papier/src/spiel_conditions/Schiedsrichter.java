@@ -1,4 +1,8 @@
-package spiel_synchronized_wait_notify;
+package spiel_conditions;
+
+import spiel_synchronized_wait_notify.Hand;
+import spiel_synchronized_wait_notify.Spieler;
+import spiel_synchronized_wait_notify.Spieltisch_synchronized;
 
 public class Schiedsrichter extends Thread
 {
