@@ -6,6 +6,7 @@ import java.util.List;
 /* Pendant zum ShopServer */
 public class Mensa
 {
+	/* Variablen */
 	private int kassenAnzahl;
 	private int studentenAnzahl;
 	private int laufzeit;
@@ -13,6 +14,7 @@ public class Mensa
 	private List<Kasse> kassenListe;
 	private List<Student> studentenListe;
 	
+	/* Konstrutor */
 	public Mensa(int _kassen, int _studenten, int _dauer)
 	{
 		kassenAnzahl = _kassen;
@@ -22,10 +24,11 @@ public class Mensa
 		kassenListe = new ArrayList<Kasse>();
 		studentenListe = new ArrayList<Student>();
 		
-		startSimulation();
+		openDoors();
 	}
 	
-	private void startSimulation()
+	/* öffnet die Mensatüren */
+	private void openDoors()
 	{
 		System.err.println("---------- START ---------");
 		for(int i = 1; i <= kassenAnzahl; i++)
@@ -61,14 +64,13 @@ public class Mensa
 	
 	private void warten()
 	{
-		int sleepTime = (int) (30 * Math.random());
+		int sleepTime = (int) (10 * Math.random());
 		try
 		{
 			Thread.sleep(sleepTime);
 		} catch (InterruptedException e)
 		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			//
 		}
 	}
 }
