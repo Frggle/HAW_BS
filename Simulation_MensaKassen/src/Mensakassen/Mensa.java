@@ -1,69 +1,59 @@
 package Mensakassen;
 
-import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
-import java.util.concurrent.Semaphore;
 
-/*
- * Mensa.java
- * Version 1.0
- * Autor: Kaepke
- * Zweck: Hält alle Kassen -> entspricht dem Server aus dem Beispiel "Shop"
- */
 public class Mensa
-{	
-	/* Variablen */
-	private List<Kasse> kassenListe;
-	private List<Student> studentenListe;
-	private List<Integer> warteschlangen;
+{
+	private List<Kasse> alleKassen;
+	private List<Student> alleStudenten;
+	private int mensaDauerMilisec;
 	
-	/* EINE Kasse kann nur ein Student zur Zeit bedienen/bezahlen lassen */
-	private Semaphore semaphore = new Semaphore(1);
-	
-	/* Konstruktor */
-	public Mensa(List<Kasse> kassen)
+	public Mensa(int kassen, int studenten, int dauerMillis)
 	{
-		kassenListe = kassen;
+		alleKassen = new LinkedList<>();
+		for (int i = 1; i <= kassen; i++)
+		{
+			alleKassen.add(new Kasse("Kasse" + (i)));
+		}
+		alleStudenten = new LinkedList<>();
+		for (int i = 1; i <= studenten; i++)
+		{
+			alleStudenten.add(new Student("Student" + (i), this));
+		}
+		mensaDauerMilisec = dauerMillis;
+		
+		startSimulation();
 	}
-	
-	public void kassenZuweisung(Student student)
-	{	
+
+	public List<Kasse> getKassen()
+	{
+		return Collections.unmodifiableList(alleKassen);
+	}
+
+	public void startSimulation()
+	{
+		System.err.println("----------Mensa hat eröffnet--------------------");
+		for (Student student : alleStudenten)
+		{
+			student.start();
+		}
+
 		try
 		{
-			// Versuche eine leere Kasse zu bekommen, ansonsten warte
-			semaphore.acquire();
-					
-			// die Kasse mit der kürzesten Warteschlange wird ermittelt und dem Student zugewiesen
-			Kasse k = gibOptimaleKasse();
-			k.anstellen(student);
+			Thread.sleep(mensaDauerMilisec);
 		} catch (InterruptedException e)
 		{
 			//
-		} finally
-		{
-			// Verlässt den kritischen Abschnitt
-			semaphore.release();
 		}
-	}
-	
-	/* gibt die Kasse zurück, wo die Warteschlange am kürzesten ist */
-	private Kasse gibOptimaleKasse()
-	{
-		Semaphore sema = new Sema
-		Kasse optKasse = null;
-		warteschlangen = new ArrayList<Integer>();
-		int min = Integer.MAX_VALUE;
-		for(Kasse kasse : kassenListe)
+		for (Student student : alleStudenten)
 		{
-			if(kasse.)
+			while(!student.isInterrupted())
 			{
-				optKasse = kasse;
-			}
+				student.interrupt();	
+			}	
 		}
-		return optKasse;
+		System.err.println("----------Mensa hat geschlossen--------------------");
 	}
 }

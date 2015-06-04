@@ -1,67 +1,63 @@
 package Mensakassen;
 
-/*
- * Student.java
- * Version 1.0
- * Autor: Kaepke
- * Zweck: Simuliert das Verhalten eines Studenten in der Mensa
- */
+import java.util.List;
+import java.util.concurrent.Semaphore;
+
 public class Student extends Thread
 {
-	/* Variablen */
-	private int studentID;
 	private Mensa mensa;
-		
-	/* Konstruktor */
-	public Student(int id, Mensa _mensa)
+	private Semaphore myLock;
+
+	public Student(String name, Mensa _mensa)
 	{
-		studentID = id;
+		super(name);
 		mensa = _mensa;
+		myLock = new Semaphore(1, true);
 	}
 	
-	/* wird von der .start() Methode aufgerufen */
-	public void run()
+	private void randomTime()
 	{
 		try
 		{
-			/* gehe immer wieder essen, bis Mensa geschlossen */
-			while(!isInterrupted())
-			{
-				System.err.println("Student " + studentID + " hat sich angestellt");
-				
-				/* Student betritt die Mensa */
-				
-				
-				/* Student isst und verdaut */
-				essenUndVerdauen();
-				
-				/* Student wartet bis er erneut in die Mensa geht */
-				warten();			
-				}
+			Thread.sleep((int) (Math.random() * 100));
 		} catch (InterruptedException e)
 		{
-			System.err.println("Student " + studentID + " wurde unterbrochen!");
+			//
 		}
 	}
-	
-	/* Student benutzt diese Methode, um das Essen zu verdauen */
-	private void essenUndVerdauen() throws InterruptedException
+
+	@Override
+	public void run()
 	{
-		int verdauungsdauer = (int) (1000* Math.random());
-		Thread.sleep(verdauungsdauer);
+		while (!Thread.interrupted())
+		{
+			try
+			{
+				Kasse anstellkasse = null;
+				for (Kasse kasse : mensa.getKassen())
+				{
+//					System.err.println(kasse.getName() + " " + kasse.laengeDerSchlange());
+					if (anstellkasse == null || anstellkasse.laengeDerSchlange() > kasse.laengeDerSchlange())
+					{
+						anstellkasse = kasse;
+					}
+				}
+				anstellkasse.anstellen();
+				
+				// Anstehzeit
+				randomTime();
+				
+				anstellkasse.bezahlen();
+
+				// Essen
+				randomTime();
+			} catch (InterruptedException e)
+			{
+				//
+			} finally
+			{
+				//
+			}
+		}
 	}
-	
-	/* Student wartet, bis er erneut in die Mensa geht */
-	private void warten() throws InterruptedException
-	{
-		int warteZeit = (int) (1000 * Math.random());
-		Thread.sleep(warteZeit);
-	}
-	
-	/* Gett für StudentenID */
-	public int gibStudentID()
-	{
-		return studentID;
-	}
-	
 }

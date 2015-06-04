@@ -2,41 +2,37 @@ package Mensakassen;
 
 import java.util.concurrent.Semaphore;
 
-/*
- * Kasse.java
- * Version 1.0
- * Autor: Kaepke
- * Zweck: ...
- */
-
-public class Kasse extends Thread
+public class Kasse
 {
-	/* Variablen */
-	private int kassenID;
-	
-	/* Pro Kasse genau ein Student warten */
-	private Semaphore semaphore = new Semaphore(1);
-	
-	/* Konstruktor */
-	public Kasse(int id)
+	private String myName;
+	private Semaphore myLock;
+
+	public Kasse(String name)
 	{
-		kassenID = id;
+		myName = name;
+		myLock = new Semaphore(1, true);
 	}
-	
-	/* wird von .start() Methode aufgerufen */
-	public void run()
+
+	public String getName()
 	{
-		//
+		return myName;
 	}
-	
-	public void anstellen(Student student)
+
+	public void anstellen() throws InterruptedException
 	{
-		//
+		System.err.println(Thread.currentThread().getName() + " hat sich an " + myName + " angestellt!");
+		myLock.acquire();		
+//		System.err.println(Thread.currentThread().getName() + " darf an " + myName + " bezahlen!");
 	}
-	
-	/* Getter für Kassen ID */
-	public int gibKassenID()
+
+	public int laengeDerSchlange()// throws InterruptedException
 	{
-		return kassenID;
+		return myLock.getQueueLength();
+	}
+
+	public void bezahlen()// throws InterruptedException
+	{
+		System.err.println(Thread.currentThread().getName() + " hat an " + myName + " bezahlt!");
+		myLock.release();
 	}
 }
