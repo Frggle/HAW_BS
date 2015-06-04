@@ -1,5 +1,9 @@
 package nextTry;
 
+/*
+ * nextTry ist die aktuelle Version, mit einer Warteschlange. 
+ */
+
 /* Eröffnet die Mensa */
 public class Start
 {
