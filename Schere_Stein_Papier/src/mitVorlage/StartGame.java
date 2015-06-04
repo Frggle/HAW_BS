@@ -1,15 +1,11 @@
 package mitVorlage;
 
-import java.text.NumberFormat;
-import java.util.List;
-
 public class StartGame extends Thread
 {	
 	private static final int SPIELDAUER = 1000;
 	
 	@SuppressWarnings("rawtypes")
 	private static BoundedBuffer buffer;
-	private static List<Player> playerListe;
 	private static Player spieler1;
 	private static Player spieler2;
 	private static Spieltisch tisch;
