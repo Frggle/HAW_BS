@@ -1,4 +1,4 @@
-package spiel_conditions;
+package mitVorlage;
 
 public enum Hand
 {
@@ -28,4 +28,3 @@ public enum Hand
 		}
 	}
 }
-
