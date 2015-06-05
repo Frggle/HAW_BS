@@ -41,7 +41,7 @@ public class Mensa
 			Student s = new Student("Student" + i, kassenListe);
 			studentenListe.add(s);
 			s.start();
-			warten();
+//			warten();
 		}
 		
 		// Laufzeit abwarten
@@ -62,15 +62,15 @@ public class Mensa
 		System.err.println("---------- ENDE ---------");
 	}
 	
-	private void warten()
-	{
-		int sleepTime = (int) (10 * Math.random());
-		try
-		{
-			Thread.sleep(sleepTime);
-		} catch (InterruptedException e)
-		{
-			//
-		}
-	}
+//	private void warten()
+//	{
+//		int sleepTime = (int) (10 * Math.random());
+//		try
+//		{
+//			Thread.sleep(sleepTime);
+//		} catch (InterruptedException e)
+//		{
+//			//
+//		}
+//	}
 }

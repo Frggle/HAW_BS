@@ -7,7 +7,7 @@ package nextTry;
 /* Eröffnet die Mensa */
 public class Start
 {
-	private static final int DEFAULT_ANZAHL_KASSEN = 2; // 4
+	private static final int DEFAULT_ANZAHL_KASSEN = 3; // 4
 	private static final int DEFAULT_ANZAHL_STUDENTEN = 10;
 	private static final int DEFAULT_DAUER_MILLIS = 1000;
 

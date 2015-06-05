@@ -7,14 +7,13 @@ public class Student extends Thread
 {
 	/* Variablen */
 	private List<Kasse> kassenListe;
-	private Semaphore semaphore;
+	private static final Semaphore semaphore = new Semaphore(1, true);
 	
 	/* Konstruktor */
 	public Student(String name, List<Kasse> _kassen)
 	{
 		super(name);
 		kassenListe = _kassen;
-		semaphore = new Semaphore(1, true);
 	}
 	
 	/* wird von start() aufgerufen */
@@ -25,8 +24,7 @@ public class Student extends Thread
 			// Wiederhole, bis Mensa schließt
 			while(!isInterrupted())
 			{
-//				semaphore.acquire();
-
+				semaphore.acquire();
 				// Suche die Kasse mit der kürzesten Warteschlange
 				Kasse anstellKasse = null;
 				for(Kasse k : kassenListe)
@@ -36,10 +34,22 @@ public class Student extends Thread
 						anstellKasse = k;
 					}
 				}
-//				semaphore.release();
+				
+				// erhöhe Warteschlange
+				anstellKasse.incrementQueue();
 
+				semaphore.release();
+				
 				// Gehe in die Mensa und weiter zu den Kassen, um anschließend zu zahlen
 				anstellKasse.enter();
+				
+				semaphore.acquire();
+				
+				// fertig mit bezahlen, verringere Schlange
+				anstellKasse.decrementQueue();
+				
+				// verlasse kritischen Abschnitt
+				semaphore.release();
 				
 				// Warten
 				essen();
