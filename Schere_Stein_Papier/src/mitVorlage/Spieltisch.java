@@ -4,17 +4,12 @@ public class Spieltisch extends Thread
 {
 	private Player spieler1;
 	private Player spieler2;
-	@SuppressWarnings("rawtypes")
-	private BoundedBuffer buffer;
 	private int gewonneneSpiele1;
 	private int gewonneneSpiele2;
 	private int remis;
 
-	@SuppressWarnings(
-	{ "rawtypes" })
-	public Spieltisch(BoundedBuffer _buffer, Player _spieler1, Player _spieler2)
+	public Spieltisch(Player _spieler1, Player _spieler2)
 	{
-		buffer = _buffer;
 		spieler1 = _spieler1;
 		spieler2 = _spieler2;
 		gewonneneSpiele1 = 0;

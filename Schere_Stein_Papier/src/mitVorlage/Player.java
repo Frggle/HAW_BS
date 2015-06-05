@@ -5,6 +5,7 @@ import mitVorlage.Hand;
 public class Player extends Thread
 {
 	private Hand item;
+	@SuppressWarnings("rawtypes")
 	private BoundedBuffer currentBuffer;
 
 	public <E> Player(String name, BoundedBuffer<E> buffer)
@@ -13,6 +14,7 @@ public class Player extends Thread
 		currentBuffer = buffer;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public void run()
 	{
@@ -42,6 +44,7 @@ public class Player extends Thread
 		return temp[(int) (Math.random() * temp.length)];
 	}
 
+	@SuppressWarnings("rawtypes")
 	public BoundedBuffer getBuffer()
 	{
 		return currentBuffer;

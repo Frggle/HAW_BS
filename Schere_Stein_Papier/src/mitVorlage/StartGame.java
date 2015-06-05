@@ -2,10 +2,12 @@ package mitVorlage;
 
 public class StartGame extends Thread
 {	
-	private static final int SPIELDAUER = 1000;
+	private static final int SPIELDAUER = 500;
 	
 	@SuppressWarnings("rawtypes")
-	private static BoundedBuffer buffer;
+	private static BoundedBuffer bufferMonitor;
+	@SuppressWarnings("rawtypes")
+	private static BoundedBuffer bufferCond;
 	private static Player spieler1;
 	private static Player spieler2;
 	private static Spieltisch tisch;
@@ -13,8 +15,8 @@ public class StartGame extends Thread
 	@SuppressWarnings("rawtypes")
 	public static void main(String[] args)
 	{
-		buffer = new BoundedBufferSyncCondQueues(1);
-//		buffer = new BoundedBufferSyncMonitor(1);
+		bufferCond = new BoundedBufferSyncCondQueues(1);
+		bufferMonitor = new BoundedBufferSyncMonitor(1);
 		new StartGame().start();
 	}
 	
@@ -22,9 +24,11 @@ public class StartGame extends Thread
 	public void run()
 	{
 		System.err.println("Spiel wurde gestartet!");
-		spieler1 = new Player("Player1", buffer);
-		spieler2 = new Player("Player2", buffer);
-		tisch = new Spieltisch(buffer, spieler1, spieler2);
+		
+		// Jeder Spieler erhält einen eigenen (aktuell unterschiedlichen) Buffer
+		spieler1 = new Player("Player1", bufferCond);
+		spieler2 = new Player("Player2", bufferMonitor);
+		tisch = new Spieltisch(spieler1, spieler2);
 		tisch.start();
 		spieler1.start();
 		spieler2.start();
