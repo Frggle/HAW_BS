@@ -44,7 +44,8 @@ public class Kasse
 		// Kasse ist nicht leer, Verbraucher stellt sich in die Warteschlange
 		else
 		{
-			System.err.println(this.getName() + " ist nicht leer. " + Thread.currentThread().getName() + " stellt sich an");
+			System.err.println("Keine Kasse ist leer. " + Thread.currentThread().getName() + " stellt sich bei " + this.getName() + " an");
+//			System.err.println(this.getName() + " ist nicht leer. " + Thread.currentThread().getName() + " stellt sich an");
 		}
 	}
 	
