@@ -26,11 +26,12 @@ public class Kasse
 	 */
 	public void enter() throws InterruptedException
 	{
-//		warten();
+		// Wenn Kasse nicht leer, dann tryAquire return false -> if-Block wird aufgerufen, Student stellt sich an
 		if (!semaphore.tryAcquire())
 		{
 			warten();
 			System.err.println(Thread.currentThread().getName() + " stellt sich bei " + this.getName() + " an ++");
+			// Aquire, damit er in die Semaphore-Queue gelangt -> Zustand geht auf wait()ing, da Semaphore nicht frei 
 			semaphore.acquire();
 		}
 		try
@@ -42,11 +43,13 @@ public class Kasse
 		}
 	}
 
+	/* Erhöht den Warteschlangenzähler von außen */
 	public void incrementQueue()
 	{
 		waitingQueue++;
 	}
 
+	/* Verringert den Warteschlangenzähler von außen */
 	public void decrementQueue()
 	{
 		waitingQueue--;
