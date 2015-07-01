@@ -48,11 +48,11 @@ public class SimulationEnv {
 		// CLOCK oder FIFO oder RANDOM
 		os.setREPLACEMENT_ALGORITHM(OperatingSystem.ImplementedReplacementAlgorithms.CLOCK);
 		// Anzahl Operationen innerhalb eines Seitenbereichs
-		os.setDEFAULT_LOCALITY_FACTOR(1);
+		os.setDEFAULT_LOCALITY_FACTOR(10);
 
 		// Testausgaben erwünscht? Wenn true, dann simulationTime auf max. 200
 		// ms setzen!
-		os.setTestMode(true);
+		os.setTestMode(false);
 
 		// ------------------------- Parameter setzen Ende
 		// -----------------------------------------------
