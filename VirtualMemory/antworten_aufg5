@@ -1,0 +1,15 @@
+5.a)
+
+5.b)
+		(Hauptspeicherzuteilung, Lokalitätsfaktor)
+							10,1		10,10		10,100		10,1000		15,10		20,10
+							
+		CLOCK zu FIFO		0,36		2,83		8,0			9,02		6,61		0,0		%											
+		RANDOM zu CLOCK		0,28		7,54		24,0		22,74		2,83		0,0		%							
+		FIFO zu RANDOM		0,08		4,58		14,81		12,59		3,67		0,0		%
+
+5.c)
+Zur Leistungssteigerung benötigt der entsprechende Prozess eine größere Anzahl von Seitem im RAM:
+- RAM erweitern -> Erhöhung der maximalen Seitenanzahl 
+- andere Prozesse bzw. Programme beenden/ abschalten, damit mehr Seiten zur Verfügung stehen
+- den virtuellen Speicher vergrößern
